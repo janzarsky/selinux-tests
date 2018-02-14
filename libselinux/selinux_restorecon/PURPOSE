@@ -1,0 +1,5 @@
+PURPOSE of /CoreOS/libselinux/Sanity/selinux_restorecon
+Author: Milos Malik <mmalik@redhat.com>
+
+Does selinux_restorecon work correctly? The program was added in RHEL-7.3.
+

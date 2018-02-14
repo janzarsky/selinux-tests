@@ -1,0 +1,5 @@
+PURPOSE of /CoreOS/libselinux/Sanity/setenforce
+Author: Milos Malik <mmalik@redhat.com>
+
+Does setenforce work as expected? Does it produce correct audit messages?
+

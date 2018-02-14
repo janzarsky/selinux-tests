@@ -1,0 +1,3 @@
+PURPOSE of /CoreOS/libselinux/Sanity/selinux_boolean_sub-function
+Description: Test selinux_boolean_sub function
+Author: Jan Zarsky <jzarsky@redhat.com>

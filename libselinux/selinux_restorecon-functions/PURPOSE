@@ -1,0 +1,3 @@
+PURPOSE of /CoreOS/libselinux/Sanity/selinux_restorecon-functions
+Description: Test functions in selinux_restorecon.c
+Author: Jan Zarsky <jzarsky@redhat.com>

@@ -1,0 +1,3 @@
+PURPOSE of /CoreOS/libselinux/Sanity/selabel-functions
+Description: Test selabel functions
+Author: Jan Zarsky <jzarsky@redhat.com>

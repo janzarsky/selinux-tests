@@ -1,0 +1,3 @@
+PURPOSE of /CoreOS/libselinux/Sanity/realpath_not_final-function
+Description: Test realpath_not_final function
+Author: Jan Zarsky <jzarsky@redhat.com>

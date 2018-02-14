@@ -1,0 +1,3 @@
+PURPOSE of /CoreOS/libselinux/Sanity/selinux_set_callback
+Description: Test selinux_set_callback function
+Author: Jan Zarsky <jzarsky@redhat.com>
