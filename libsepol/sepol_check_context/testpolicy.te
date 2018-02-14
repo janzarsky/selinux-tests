@@ -1,0 +1,4 @@
+policy_module(testpolicy,1.0)
+
+type xyz_file_t;
+
