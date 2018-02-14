@@ -1,0 +1,21 @@
+#!/usr/bin/expect -f
+# ./sedismod.exp option policyfile outputfile
+set option [lrange $argv 0 0]
+set policyfile [lrange $argv 1 1]
+set outputfile [lrange $argv 2 2]
+set timeout 60
+spawn sedismod $policyfile
+expect "Command*:" {
+  send -- "f\r"
+}
+expect "Filename*:" {
+  send -- "$outputfile\r"
+}
+expect "Command*:" {
+  send -- "$option\r"
+}
+expect "Command*:" {
+  send -- "q\r"
+}
+expect eof
+

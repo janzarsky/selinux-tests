@@ -1,0 +1,7 @@
+PURPOSE of /CoreOS/checkpolicy/Sanity/checkpolicy
+
+Description: runs checkpolicy with various options to find out if it behaves correctly
+
+Author: Milos Malik <mmalik@redhat.com>
+
+

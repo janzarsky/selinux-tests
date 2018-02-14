@@ -1,0 +1,7 @@
+PURPOSE of /CoreOS/checkpolicy/Sanity/checkpolicy
+
+Description: covers an issue where manpage included an unsupported option.
+
+Author: Milos Malik <mmalik@redhat.com>
+
+

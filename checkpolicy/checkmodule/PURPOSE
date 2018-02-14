@@ -1,0 +1,5 @@
+PURPOSE of /CoreOS/checkpolicy/Sanity/checkmodule
+Author: Milos Malik <mmalik@redhat.com>
+
+This TC runs checkmodule with various options to find out if it behaves correctly.
+

@@ -1,0 +1,9 @@
+module mypolicy 1.0;
+require {
+        type httpd_log_t;
+        type postfix_postdrop_t;
+        class dir getattr;
+        class file { read getattr };
+}
+allow postfix_postdrop_t httpd_log_t:file getattr; 
+
