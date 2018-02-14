@@ -1,0 +1,29 @@
+                                        init    handle  conn    trans
+semanage_set_root                   x   ok      ok      ok      -
+semanage_root                       x   ok      ok      ok      -
+semanage_handle_create              x   ok      -       -       -        
+semanage_set_rebuild                    fail    ok      ok      -
+semanage_set_reload                     fail    ok      ok      -
+semanage_get_hll_compiler_path          fail    ?       ?       -
+semanage_set_create_store               fail    ok      ok      -       should be called after connect
+semanage_get_disable_dontaudit          fail    ?       ?       -
+semanage_set_disable_dontaudit          fail    ?       ?       -
+semanage_get_preserve_tunables          fail    ?       ?       -
+semanage_set_preserve_tunables          fail    ?       ?       -
+semanage_get_ignore_module_cache        fail    ?       ?       -
+semanage_set_ignore_module_cache        fail    ?       ?       -
+semanage_set_check_contexts             fail    ok      ok      -
+semanage_get_default_priority           fail    ok      ok      -
+semanage_set_default_priority           fail    ok      ok      -
+semanage_is_connected               x   fail    ok      ok      -
+semanage_select_store                   fail    ok      ok      -       should be called before connect
+semanage_set_store_root                 fail    ok      ok      -
+semanage_is_managed                 x   fail    ok      fail    -
+semanage_mls_enabled                x   fail    ?       ok      -
+semanage_connect                    x   fail    ok      ?       -
+semanage_access_check               x   fail    ok      ?       -
+semanage_disconnect                 x   fail    fail    ok      -       ok when disconnected twice
+semanage_handle_destroy             x   fail    ok      ok      -
+semanage_begin_transaction          x   fail    fail    ok      ok      ok when begin twice
+semanage_commit                     x   fail    fail    fail    ok
+semanage_reload_policy                  fail    ?       ?       ?

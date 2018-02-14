@@ -1,0 +1,3 @@
+PURPOSE of /CoreOS/libsemanage/Sanity/semanage-seuser-functions
+Description: Test semanage_seuser_* functions
+Author: Jan Zarsky <jzarsky@redhat.com>

@@ -1,0 +1,9 @@
+PURPOSE of /CoreOS/libsemanage/Sanity/verify-options-in-semanage-conf
+Author: Milos Malik <mmalik@redhat.com>
+
+Are the verify options in semanage.conf honored?
+Tested options: verify kernel, verify module, verify linked
+Tested tools: semodule, semanage
+Positive and negative cases are tested.
+Original information found at http://selinuxproject.org/page/PolicyValidate
+
