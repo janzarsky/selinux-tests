@@ -1,0 +1,3 @@
+PURPOSE of /CoreOS/policycoreutils/Sanity/sepolicy-generate
+Description: sepolicy generate sanity test
+Author: Michal Trunecka <mtruneck@redhat.com>

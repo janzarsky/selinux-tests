@@ -1,0 +1,19 @@
+policy_module(testpolicy, 1.0)
+
+require {
+    attribute domain;
+    type fs_t;
+}
+
+type correct_t;
+files_type(correct_t)
+type incorrect_t;
+files_type(incorrect_t)
+type customizable_t;
+files_type(customizable_t)
+
+
+#allow domain correct_t:dir relabelto;
+#allow correct_t fs_t:filesystem associate;
+
+

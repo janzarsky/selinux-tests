@@ -1,0 +1,4 @@
+PURPOSE of /CoreOS/policycoreutils/Regression/semanage-interface
+Description: Does semanage interface ... work correctly?
+Author: Milos Malik <mmalik@redhat.com>
+

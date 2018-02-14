@@ -1,0 +1,5 @@
+PURPOSE of /CoreOS/policycoreutils/Regression/semanage-port-add-delete-problems
+Author: Milos Malik <mmalik@redhat.com>
+
+semanage accepts invalid port numbers and then cannot delete them
+

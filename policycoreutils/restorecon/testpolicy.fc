@@ -1,0 +1,2 @@
+/opt/restorecon_testdir(/.*)?	system_u:object_r:correct_t:s0
+

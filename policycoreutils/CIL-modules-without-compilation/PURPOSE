@@ -1,0 +1,5 @@
+PURPOSE of /CoreOS/policycoreutils/Sanity/CIL-modules-without-compilation
+Author: Milos Malik <mmalik@redhat.com>
+
+Is it possible to manage policy modules written in CIL without any compilation? Does semanage and semodule understand them?
+

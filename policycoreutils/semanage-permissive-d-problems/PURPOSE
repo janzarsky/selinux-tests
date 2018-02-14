@@ -1,0 +1,5 @@
+PURPOSE of /CoreOS/policycoreutils/Regression/semanage-permissive-d-problems
+Author: Milos Malik <mmalik@redhat.com>
+
+Does semanage permissive work correctly?
+

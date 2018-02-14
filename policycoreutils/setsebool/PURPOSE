@@ -1,0 +1,5 @@
+PURPOSE of /CoreOS/policycoreutils/Sanity/setsebool
+Author: Milos Malik <mmalik@redhat.com>
+
+Does setsebool work as expected? Does it produce correct audit messages?
+

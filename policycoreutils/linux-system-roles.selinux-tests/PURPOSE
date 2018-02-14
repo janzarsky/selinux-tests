@@ -1,0 +1,4 @@
+PURPOSE of selinux-ansible-playbook
+Author: Petr Lautrbach <plautrba@redhat.com>
+
+Run linux-system-roles.selinux (https://github.com/linux-system-roles/selinux.git) Ansible role tests

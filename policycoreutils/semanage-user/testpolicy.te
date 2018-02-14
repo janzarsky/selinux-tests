@@ -1,0 +1,11 @@
+module testpolicy 1.0;
+
+type xyz_t;
+role xyz_r;
+
+require {
+  type xyz_t;
+}
+
+role xyz_r types xyz_t;
+

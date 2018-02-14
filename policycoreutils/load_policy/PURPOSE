@@ -1,0 +1,5 @@
+PURPOSE of /CoreOS/policycoreutils/Sanity/load_policy
+Author: Milos Malik <mmalik@redhat.com>
+
+Does load_policy work as expected? Does it produce correct audit messages?
+

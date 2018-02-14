@@ -1,0 +1,4 @@
+PURPOSE of /CoreOS/policycoreutils/Sanity/sestatus
+Description: tests everything about sestatus
+Author: Milos Malik <mmalik@redhat.com>
+

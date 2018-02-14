@@ -1,0 +1,4 @@
+PURPOSE of /CoreOS/policycoreutils/Regression/semanage-user
+Description: Does semanage user ... work correctly?
+Author: Milos Malik <mmalik@redhat.com>
+
