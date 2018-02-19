@@ -1,0 +1,19 @@
+contact: Petr Lautrbach <plautrba@redhat.com>
+test: runtest.sh
+tags: [Tier2]
+
+/checkpolicy:
+    component: checkpolicy
+
+/libselinux:
+    component: libselinux
+
+/libsemanage:
+    component: libsemanage
+
+/libsepol:
+    component: libsepol
+
+/policycoreutils:
+    component: policycoreutils
+
