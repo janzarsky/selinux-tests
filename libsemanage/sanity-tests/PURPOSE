@@ -1,0 +1,3 @@
+PURPOSE of /CoreOS/libsemanage/Sanity/sanity-tests
+Description: Test libsemanage functions
+Author: Jan Zarsky <jzarsky@redhat.com>
