@@ -34,7 +34,6 @@ PACKAGE="libsemanage"
 rlJournalStart
     rlPhaseStartSetup
         rlRun "rlImport --all" || rlDie
-        rlSESatisfyRequires
 
         rlRun "rlCheckMakefileRequires"
 
