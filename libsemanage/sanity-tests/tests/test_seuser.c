@@ -781,7 +781,7 @@ void test_seuser_count(void) {
     CU_ASSERT(semanage_seuser_count(sh, NULL) < 0);
     
     // test connected
-    connect();
+    helper_connect();
 
     CU_ASSERT(semanage_seuser_count(sh, &response) >= 0);
     CU_ASSERT(response == SEUSERS_COUNT);
@@ -789,7 +789,7 @@ void test_seuser_count(void) {
     CU_ASSERT_SIGNAL(semanage_seuser_count(sh, NULL), SIGSEGV);
 
     // test in transaction
-    begin_transaction();
+    helper_begin_transaction();
 
     CU_ASSERT(semanage_seuser_count(sh, &response) >= 0);
     CU_ASSERT(response == SEUSERS_COUNT);
@@ -922,8 +922,8 @@ void helper_seuser_modify_del_local(level_t level, int seuser_index,
 
         // write changes to file
         if (level == SH_TRANS) {
-            commit();
-            begin_transaction();
+            helper_commit();
+            helper_begin_transaction();
         }
 
         CU_ASSERT(semanage_seuser_query_local(sh, key, &seuser_local) >= 0);
@@ -1051,7 +1051,7 @@ void test_seuser_count_local(void) {
     CU_ASSERT(semanage_seuser_count_local(sh, &response) < 0);
 
     // test connected
-    connect();
+    helper_connect();
 
     CU_ASSERT(semanage_seuser_count_local(sh, &response) >= 0);
     CU_ASSERT(response == 0);
@@ -1059,7 +1059,7 @@ void test_seuser_count_local(void) {
     CU_ASSERT_SIGNAL(semanage_seuser_count_local(sh, NULL), SIGSEGV);
 
     // test in transaction
-    begin_transaction();
+    helper_begin_transaction();
     
     CU_ASSERT(semanage_seuser_count_local(sh, &response) >= 0);
     CU_ASSERT(response == 0);
@@ -1101,7 +1101,7 @@ void test_seuser_iterate_local(void) {
                                  &handler_seuser_iterate_local, NULL), SIGSEGV);
 
     // test with handle
-    handle_create();
+    helper_handle_create();
 
     CU_ASSERT(semanage_seuser_iterate_local(sh, &handler_seuser_iterate_local,
                                             NULL) < 0);
@@ -1109,7 +1109,7 @@ void test_seuser_iterate_local(void) {
     CU_ASSERT(semanage_seuser_iterate_local(sh, NULL, NULL) < 0);
 
     // test connected
-    connect();
+    helper_connect();
 
     counter_seuser_iterate_local = 0;
     CU_ASSERT(semanage_seuser_iterate_local(sh, &handler_seuser_iterate_local,
@@ -1120,7 +1120,7 @@ void test_seuser_iterate_local(void) {
     CU_ASSERT(semanage_seuser_iterate_local(sh, NULL, NULL) >= 0);
 
     // test in transaction
-    begin_transaction();
+    helper_begin_transaction();
 
     counter_seuser_iterate_local = 0;
     CU_ASSERT(semanage_seuser_iterate_local(sh, &handler_seuser_iterate_local,
@@ -1159,7 +1159,7 @@ void test_seuser_list_local(void) {
                      SIGSEGV);
     
     // test with handle
-    handle_create();
+    helper_handle_create();
 
     CU_ASSERT(semanage_seuser_list_local(sh, &records, &count) < 0);
 
@@ -1167,7 +1167,7 @@ void test_seuser_list_local(void) {
     CU_ASSERT(semanage_seuser_list_local(sh, &records, NULL) < 0);
 
     // test connected
-    connect();
+    helper_connect();
     
     CU_ASSERT(semanage_seuser_list_local(sh, &records, &count) >= 0);
     CU_ASSERT(count == 0);
@@ -1176,7 +1176,7 @@ void test_seuser_list_local(void) {
     CU_ASSERT_SIGNAL(semanage_seuser_list_local(sh, &records, NULL), SIGSEGV);
 
     // test in transaction
-    begin_transaction();
+    helper_begin_transaction();
 
     CU_ASSERT(semanage_seuser_list_local(sh, &records, &count) >= 0);
     CU_ASSERT(count == 0);

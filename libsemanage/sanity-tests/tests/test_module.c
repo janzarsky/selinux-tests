@@ -230,7 +230,7 @@ int module_add_tests(CU_pSuite suite) {
 void helper_module_install_invalid(void) {
     // disconnected
     setup_handle(SH_CONNECT);
-    disconnect();
+    helper_disconnect();
 
     CU_ASSERT(semanage_module_install(sh, CIL_TEXT, strlen(CIL_TEXT),
                                       CIL_NAME, CIL_LANG_EXT) < 0);
@@ -266,13 +266,13 @@ void helper_module_install_cil(void) {
     CU_ASSERT(semanage_module_install(sh, CIL_TEXT, strlen(CIL_TEXT),
                                       CIL_NAME, CIL_LANG_EXT) >= 0);
 
-    commit();
+    helper_commit();
     
     // test
     CU_ASSERT(module_exists(CIL_NAME));
 
     // cleanup
-    begin_transaction();
+    helper_begin_transaction();
 
     CU_ASSERT(semanage_module_remove(sh, CIL_NAME) >= 0);
 
@@ -286,13 +286,13 @@ void helper_module_install_hll(void) {
     CU_ASSERT(semanage_module_install(sh, HLL_DATA, HLL_DATA_LEN, HLL_NAME,
                                       HLL_LANG_EXT) >= 0);
 
-    commit();
+    helper_commit();
     
     // test
     CU_ASSERT(module_exists(HLL_NAME));
 
     // cleanup
-    begin_transaction();
+    helper_begin_transaction();
 
     CU_ASSERT(semanage_module_remove(sh, HLL_NAME) >= 0);
 
@@ -310,7 +310,7 @@ void test_module_install(void) {
 void helper_module_install_file_invalid(void) {
     // disconnected
     setup_handle(SH_CONNECT);
-    disconnect();
+    helper_disconnect();
 
     CU_ASSERT(semanage_module_install_file(sh, CIL_FILE) < 0);
 
@@ -340,13 +340,13 @@ void helper_module_install_file_cil(void) {
 
     CU_ASSERT(semanage_module_install_file(sh, CIL_FILE) >= 0);
 
-    commit();
+    helper_commit();
     
     // test
     CU_ASSERT(module_exists(CIL_NAME));
 
     // cleanup
-    begin_transaction();
+    helper_begin_transaction();
 
     CU_ASSERT(semanage_module_remove(sh, CIL_NAME) >= 0);
 
@@ -359,13 +359,13 @@ void helper_module_install_file_bzip(void) {
 
     CU_ASSERT(semanage_module_install_file(sh, BZIP_FILE) >= 0);
 
-    commit();
+    helper_commit();
     
     // test
     CU_ASSERT(module_exists(BZIP_NAME));
 
     // cleanup
-    begin_transaction();
+    helper_begin_transaction();
 
     CU_ASSERT(semanage_module_remove(sh, BZIP_NAME) >= 0);
 
@@ -378,13 +378,13 @@ void helper_module_install_file_hll(void) {
 
     CU_ASSERT(semanage_module_install_file(sh, HLL_FILE) >= 0);
 
-    commit();
+    helper_commit();
     
     // test
     CU_ASSERT(module_exists(HLL_NAME));
 
     // cleanup
-    begin_transaction();
+    helper_begin_transaction();
 
     CU_ASSERT(semanage_module_remove(sh, HLL_NAME) >= 0);
 
@@ -401,13 +401,13 @@ void helper_module_install_file_overridden(void) {
     CU_ASSERT(semanage_set_default_priority(sh, 1) >= 0);
     CU_ASSERT(semanage_module_install_file(sh, PRIORITY_FILE) >= 0);
 
-    commit();
+    helper_commit();
     
     // test
     CU_ASSERT(!module_exists(PRIORITY_BOOL));
 
     // cleanup
-    begin_transaction();
+    helper_begin_transaction();
 
     CU_ASSERT(semanage_set_default_priority(sh, 1) >= 0);
     CU_ASSERT(semanage_module_remove(sh, PRIORITY_NAME) >= 0);
@@ -428,13 +428,13 @@ void helper_module_install_file_override(void) {
     CU_ASSERT(semanage_set_default_priority(sh, 999) >= 0);
     CU_ASSERT(semanage_module_install_file(sh, PRIORITY_FILE) >= 0);
 
-    commit();
+    helper_commit();
     
     // test
     CU_ASSERT(module_exists(PRIORITY_BOOL));
 
     // cleanup
-    begin_transaction();
+    helper_begin_transaction();
 
     CU_ASSERT(semanage_set_default_priority(sh, 999) >= 0);
     CU_ASSERT(semanage_module_remove(sh, PRIORITY_NAME) >= 0);
@@ -453,13 +453,13 @@ void helper_module_install_file_conflict(void) {
 
     CU_ASSERT(semanage_module_install_file(sh, PRIORITY_FILE) >= 0);
 
-    commit();
+    helper_commit();
     
     // test
     CU_ASSERT(module_exists(PRIORITY_BOOL));
 
     // cleanup
-    begin_transaction();
+    helper_begin_transaction();
     
     CU_ASSERT(semanage_module_remove(sh, PRIORITY_NAME) >= 0);
 
@@ -492,25 +492,25 @@ void test_module_install_info(void) {
     CU_ASSERT(semanage_module_info_set_enabled(sh, modinfo, 1) >= 0);
 
     // test disconnected
-    disconnect();
+    helper_disconnect();
 
     CU_ASSERT(semanage_module_install_info(sh, modinfo, CIL_TEXT,
                                            strlen(CIL_TEXT)) < 0);
 
     // test not in transaction
-    connect();
+    helper_connect();
 
     CU_ASSERT(semanage_module_install_info(sh, modinfo, CIL_TEXT,
                                            strlen(CIL_TEXT)) >= 0);
 
-    commit();
+    helper_commit();
 
     CU_ASSERT(module_exists(CIL_NAME));
 
     // cleanup
-    begin_transaction();
+    helper_begin_transaction();
     CU_ASSERT(semanage_module_remove(sh, CIL_NAME) >= 0);
-    commit();
+    helper_commit();
 
     semanage_module_info_destroy(sh, modinfo);
     free(modinfo);
@@ -527,15 +527,15 @@ void test_module_remove(void) {
 
     CU_ASSERT(semanage_module_install_file(sh, CIL_FILE) >= 0);
 
-    commit();
+    helper_commit();
 
     // test disconnected
-    disconnect();
+    helper_disconnect();
 
     CU_ASSERT(semanage_module_remove(sh, CIL_NAME) < 0);
 
     // test not in transaction
-    connect();
+    helper_connect();
 
     CU_ASSERT(semanage_module_remove(sh, CIL_NAME) >= 0);
 
@@ -557,19 +557,19 @@ void test_module_remove_key(void) {
     CU_ASSERT(semanage_module_key_set_name(sh, modkey, CIL_NAME) >= 0);
     CU_ASSERT(semanage_module_key_set_priority(sh, modkey, 400) >= 0);
 
-    commit();
+    helper_commit();
 
     // test disconnected
-    disconnect();
+    helper_disconnect();
 
     CU_ASSERT(semanage_module_remove_key(sh, modkey) < 0);
 
     // test not in transaction
-    connect();
+    helper_connect();
 
     CU_ASSERT(semanage_module_remove_key(sh, modkey) >= 0);
 
-    commit();
+    helper_commit();
 
     semanage_module_key_destroy(sh, modkey);
     free(modkey);
@@ -599,13 +599,13 @@ void helper_module_extract_invalid() {
     CU_ASSERT_SIGNAL(semanage_module_extract(sh, modkey, 0, NULL, &data_len,
                                              &modinfo), SIGSEGV);
 
-    disconnect();
+    helper_disconnect();
 
     CU_ASSERT(semanage_module_extract(sh, modkey, 0, &mapped_data, &data_len,
                                       &modinfo) < 0);
 
-    connect();
-    begin_transaction();
+    helper_connect();
+    helper_begin_transaction();
 
     CU_ASSERT(semanage_module_key_set_name(sh, modkey,
                                            "my_nonexisting_module") >= 0);
@@ -635,7 +635,7 @@ void helper_module_extract() {
     CU_ASSERT(semanage_module_install_file(sh, CIL_FILE) >= 0);
     CU_ASSERT(semanage_module_install_file(sh, BZIP_FILE) >= 0);
 
-    commit();
+    helper_commit();
 
     CU_ASSERT(semanage_module_key_create(sh, &modkey1) >= 0);
     CU_ASSERT(semanage_module_key_set_name(sh, modkey1, CIL_NAME) >= 0);
@@ -711,7 +711,7 @@ void helper_module_list_all_invalid() {
     int count = -1;
 
     setup_handle(SH_CONNECT);
-    disconnect();
+    helper_disconnect();
 
     CU_ASSERT(semanage_module_list_all(sh, &records, &count) < 0);
 
@@ -853,14 +853,14 @@ void test_module_get_module_info(void) {
                      SIGABRT);
 
     // test disconnected
-    connect();
-    disconnect();
+    helper_connect();
+    helper_disconnect();
 
     CU_ASSERT(semanage_module_get_module_info(sh, modkey, &modinfo) < 0);
 
     // test nonexisting module
 
-    connect();
+    helper_connect();
 
     CU_ASSERT(semanage_module_key_set_name(sh, modkey,
                                            "my_nonexisting_module") >= 0);
@@ -869,12 +869,12 @@ void test_module_get_module_info(void) {
 
     // test existing module
 
-    connect();
-    begin_transaction();
+    helper_connect();
+    helper_begin_transaction();
     
     CU_ASSERT(semanage_module_install_file(sh, CIL_FILE) >= 0);
 
-    commit();
+    helper_commit();
 
     CU_ASSERT(semanage_module_key_set_name(sh, modkey, CIL_NAME) >= 0);
     CU_ASSERT(semanage_module_key_set_priority(sh, modkey, 400) >= 0);
@@ -887,7 +887,7 @@ void test_module_get_module_info(void) {
     CU_ASSERT(semanage_module_info_get_priority(sh, modinfo, &priority) >= 0);
     CU_ASSERT(priority == 400);
 
-    begin_transaction();
+    helper_begin_transaction();
 
     CU_ASSERT(semanage_module_remove(sh, CIL_NAME) >= 0);
 

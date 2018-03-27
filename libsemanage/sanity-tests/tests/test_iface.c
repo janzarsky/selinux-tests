@@ -421,8 +421,8 @@ void test_iface_modify_del_query_local(void) {
     CU_ASSERT(semanage_iface_modify_local(sh, key, iface) >= 0);
 
     // write changes to file
-    commit();
-    begin_transaction();
+    helper_commit();
+    helper_begin_transaction();
 
     CU_ASSERT(semanage_iface_query_local(sh, key, &iface_local) >= 0);
     CU_ASSERT_PTR_NOT_NULL_FATAL(iface_local);

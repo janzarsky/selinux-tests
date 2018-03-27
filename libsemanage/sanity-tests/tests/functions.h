@@ -40,12 +40,12 @@ void setup_handle(level_t level);
 void cleanup_handle(level_t level);
 void setup_handle_invalid_store(level_t level);
 
-void handle_create(void);
-void handle_destroy(void);
-void connect(void);
-void disconnect(void);
-void begin_transaction(void);
-void commit(void);
+void helper_handle_create(void);
+void helper_handle_destroy(void);
+void helper_connect(void);
+void helper_disconnect(void);
+void helper_begin_transaction(void);
+void helper_commit(void);
 
 int context_compare(semanage_context_t *con, const char *str);
 

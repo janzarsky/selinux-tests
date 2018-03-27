@@ -691,8 +691,8 @@ void helper_bool_modify_del_local(level_t level, int bool_index,
 
         // write changes to file
         if (level == SH_TRANS) {
-            commit();
-            begin_transaction();
+            helper_commit();
+            helper_begin_transaction();
         }
 
         CU_ASSERT(semanage_bool_query_local(sh, key, &boolean_local) >= 0);

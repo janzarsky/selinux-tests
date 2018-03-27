@@ -904,8 +904,8 @@ void helper_fcontext_modify_del_local(level_t level, int fcontext_index,
         CU_ASSERT(result >= 0);
 
         if (level == SH_TRANS) {
-            commit();
-            begin_transaction();
+            helper_commit();
+            helper_begin_transaction();
         }
 
         CU_ASSERT(semanage_fcontext_query_local(sh, key, &fcontext_local) >= 0);

@@ -462,8 +462,8 @@ void test_user_modify_del_query_local(void) {
     CU_ASSERT(semanage_user_modify_local(sh, key, user) >= 0);
 
     // write changes to file
-    commit();
-    begin_transaction();
+    helper_commit();
+    helper_begin_transaction();
 
     CU_ASSERT(semanage_user_query_local(sh, key, &user_local) >= 0);
     CU_ASSERT_PTR_NOT_NULL_FATAL(user_local);

@@ -342,8 +342,8 @@ void test_ibendport_modify_del_query_local(void) {
     CU_ASSERT(semanage_ibendport_modify_local(sh, key_tmp, ibendport_tmp) >= 0);
 
     // write changes to file
-    commit();
-    begin_transaction();
+    helper_commit();
+    helper_begin_transaction();
 
     CU_ASSERT(semanage_ibendport_query_local(sh, key, &ibendport_local) >= 0);
     CU_ASSERT_PTR_NOT_NULL_FATAL(ibendport_local);

@@ -27,7 +27,7 @@ void stderr_callback(void *varg, semanage_handle_t *sh, const char *fmt, ...) {
     va_end(args);
 }
 
-void handle_create(void) {
+void helper_handle_create(void) {
     sh = semanage_handle_create();
     
     CU_ASSERT_PTR_NOT_NULL(sh);
@@ -35,23 +35,23 @@ void handle_create(void) {
     semanage_msg_set_callback(sh, stderr_callback, NULL);
 }
 
-void handle_destroy(void) {
+void helper_handle_destroy(void) {
     semanage_handle_destroy(sh);
 }
 
-void connect(void) {
+void helper_connect(void) {
     CU_ASSERT(semanage_connect(sh) >= 0);
 }
 
-void disconnect(void) {
+void helper_disconnect(void) {
     CU_ASSERT(semanage_disconnect(sh) >= 0);
 }
 
-void begin_transaction(void) {
+void helper_begin_transaction(void) {
     CU_ASSERT(semanage_begin_transaction(sh) >= 0);
 }
 
-void commit(void) {
+void helper_commit(void) {
     CU_ASSERT(semanage_commit(sh) >= 0);
 }
 
@@ -60,24 +60,24 @@ void setup_handle(level_t level) {
         sh = NULL;
 
     if (level >= SH_HANDLE)
-        handle_create();
+        helper_handle_create();
 
     if (level >= SH_CONNECT)
-        connect();
+        helper_connect();
 
     if (level >= SH_TRANS)
-        begin_transaction();
+        helper_begin_transaction();
 }
 
 void cleanup_handle(level_t level) {
     if (level >= SH_TRANS)
-        commit();
+        helper_commit();
 
     if (level >= SH_CONNECT)
-        disconnect();
+        helper_disconnect();
 
     if (level >= SH_HANDLE)
-        handle_destroy();
+        helper_handle_destroy();
 
     if (level >= SH_NULL)
         sh = NULL;
@@ -86,15 +86,15 @@ void cleanup_handle(level_t level) {
 void setup_handle_invalid_store(level_t level) {
     CU_ASSERT(level >= SH_HANDLE);
 
-    handle_create();
+    helper_handle_create();
     
     semanage_select_store(sh, "", SEMANAGE_CON_INVALID);
 
     if (level >= SH_CONNECT)
-        connect();
+        helper_connect();
 
     if (level >= SH_TRANS)
-        begin_transaction();
+        helper_begin_transaction();
 }
 
 int context_compare(semanage_context_t *con, const char *str) {

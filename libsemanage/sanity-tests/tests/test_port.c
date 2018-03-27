@@ -684,7 +684,7 @@ void helper_port_validate_local_noport(void) {
 
     add_local_port(I_FIRST);
 
-    commit();
+    helper_commit();
 
     key = get_port_key_nth(I_FIRST);
 
@@ -692,14 +692,14 @@ void helper_port_validate_local_noport(void) {
     CU_ASSERT(response);
 
     // test
-    begin_transaction();
+    helper_begin_transaction();
 
     delete_local_port(I_FIRST);
 
-    commit();
+    helper_commit();
 
     // cleanup
-    begin_transaction();
+    helper_begin_transaction();
     delete_local_port(I_FIRST);
     cleanup_handle(SH_TRANS);
 }
@@ -711,10 +711,10 @@ void helper_port_validate_local_oneport(void) {
     add_local_port(I_FIRST);
 
     // test
-    commit();
+    helper_commit();
 
     // cleanup
-    begin_transaction();
+    helper_begin_transaction();
     delete_local_port(I_FIRST);
     cleanup_handle(SH_TRANS);
 }
@@ -753,10 +753,10 @@ void helper_port_validate_local_twoports(void) {
     CU_ASSERT(semanage_port_modify_local(sh, key2, port2) >= 0);
 
     // test
-    commit();
+    helper_commit();
 
     // cleanup
-    begin_transaction();
+    helper_begin_transaction();
     CU_ASSERT(semanage_port_del_local(sh, key1) >= 0);
     CU_ASSERT(semanage_port_del_local(sh, key2) >= 0);
     semanage_port_key_free(key1);
@@ -812,7 +812,7 @@ void helper_port_validate_local_proto(void) {
     CU_ASSERT(semanage_port_modify_local(sh, key3, port3) >= 0);
 
     // test
-    commit();
+    helper_commit();
 
     // cleanup
     CU_ASSERT(semanage_port_del_local(sh, key1) >= 0);
