@@ -1,0 +1,9 @@
+PURPOSE of /CoreOS/selinux-policy/Sanity/policy-rpm-macros
+Author: Milos Malik <mmalik@redhat.com>
+
+Are necessary RPM macros defined for various policy actions? Are they defined correctly?
+
+More information at:
+ * https://plautrba.fedorapeople.org/blok/Fedora-SELinux-module-packaging.html
+ * https://github.com/fedora-selinux/selinux-policy-macros/blob/master/README.adoc
+
