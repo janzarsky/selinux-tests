@@ -204,12 +204,21 @@ void test_port_get_proto_str(void) {
     str = semanage_port_get_proto_str(1);
     CU_ASSERT_STRING_EQUAL(str, "tcp");
 
-#if VERS_CHECK(2, 5)
     str = semanage_port_get_proto_str(2);
+#if VERS_CHECK(2, 5)
     CU_ASSERT_STRING_EQUAL(str, "dccp");
+#else
+    CU_ASSERT_STRING_EQUAL(str, "???");
 #endif
 
     str = semanage_port_get_proto_str(3);
+#if VERS_CHECK(2, 8) || VERS_CHECK_REL(2, 7, 6)
+    CU_ASSERT_STRING_EQUAL(str, "sctp");
+#else
+    CU_ASSERT_STRING_EQUAL(str, "???");
+#endif
+
+    str = semanage_port_get_proto_str(4);
     CU_ASSERT_STRING_EQUAL(str, "???");
 }
 
