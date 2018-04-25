@@ -99,7 +99,7 @@ int bool_add_tests(CU_pSuite suite) {
     CU_add_test(suite, "bool_count", test_bool_count);
     CU_add_test(suite, "bool_iterate", test_bool_iterate);
     CU_add_test(suite, "bool_list", test_bool_list);
-                                 
+
     CU_add_test(suite, "bool_modify_del_local", test_bool_modify_del_local);
     CU_add_test(suite, "bool_query_local", test_bool_query_local);
     CU_add_test(suite, "bool_exists_local", test_bool_exists_local);
@@ -797,6 +797,7 @@ void test_bool_exists_local(void) {
 
 void test_bool_count_local(void) {
     unsigned int response;
+    unsigned int init_count;
 
     // null
     CU_ASSERT_SIGNAL(semanage_bool_count_local(NULL, &response), SIGSEGV);
@@ -811,8 +812,7 @@ void test_bool_count_local(void) {
     // connect
     setup_handle(SH_CONNECT);
 
-    CU_ASSERT(semanage_bool_count_local(sh, &response) >= 0);
-    CU_ASSERT(response == 0);
+    CU_ASSERT(semanage_bool_count_local(sh, &init_count) >= 0);
 
     CU_ASSERT_SIGNAL(semanage_bool_count_local(sh, NULL), SIGSEGV);
 
@@ -820,24 +820,24 @@ void test_bool_count_local(void) {
     
     // transaction
     setup_handle(SH_TRANS);
-    
+
     CU_ASSERT(semanage_bool_count_local(sh, &response) >= 0);
-    CU_ASSERT(response == 0);
+    CU_ASSERT(response == init_count);
 
     add_local_bool(I_FIRST);
 
     CU_ASSERT(semanage_bool_count_local(sh, &response) >= 0);
-    CU_ASSERT(response == 1);
+    CU_ASSERT(response == init_count + 1);
 
     add_local_bool(I_SECOND);
 
     CU_ASSERT(semanage_bool_count_local(sh, &response) >= 0);
-    CU_ASSERT(response == 2);
+    CU_ASSERT(response == init_count + 2);
     
     delete_local_bool(I_SECOND);
 
     CU_ASSERT(semanage_bool_count_local(sh, &response) >= 0);
-    CU_ASSERT(response == 1);
+    CU_ASSERT(response == init_count + 1);
 
     delete_local_bool(I_FIRST);
 
@@ -856,6 +856,8 @@ int handler_bool_iterate_local(const semanage_bool_t *record, void *varg) {
 }
 
 void test_bool_iterate_local(void) {
+    unsigned int init_count;
+
     // null
     CU_ASSERT_SIGNAL(semanage_bool_iterate_local(NULL,
                                    &handler_bool_iterate_local, NULL), SIGSEGV);
@@ -873,13 +875,12 @@ void test_bool_iterate_local(void) {
     // connect
     setup_handle(SH_CONNECT);
 
+    CU_ASSERT(semanage_bool_count_local(sh, &init_count) >= 0);
+
     counter_bool_iterate_local = 0;
     CU_ASSERT(semanage_bool_iterate_local(sh, &handler_bool_iterate_local,
                                           NULL) >= 0);
-    CU_ASSERT(counter_bool_iterate_local == 0);
-
-    // FIXME
-    CU_ASSERT(semanage_bool_iterate_local(sh, NULL, NULL) >= 0);
+    CU_ASSERT(counter_bool_iterate_local == init_count);
 
     cleanup_handle(SH_CONNECT);
 
@@ -889,21 +890,21 @@ void test_bool_iterate_local(void) {
     counter_bool_iterate_local = 0;
     CU_ASSERT(semanage_bool_iterate_local(sh, &handler_bool_iterate_local,
                                           NULL) >= 0);
-    CU_ASSERT(counter_bool_iterate_local == 0);
+    CU_ASSERT(counter_bool_iterate_local == init_count);
 
     add_local_bool(I_FIRST);
 
     counter_bool_iterate_local = 0;
     CU_ASSERT(semanage_bool_iterate_local(sh, &handler_bool_iterate_local,
                                           NULL) >= 0);
-    CU_ASSERT(counter_bool_iterate_local == 1);
+    CU_ASSERT(counter_bool_iterate_local == init_count + 1);
 
     add_local_bool(I_SECOND);
 
     counter_bool_iterate_local = 0;
     CU_ASSERT(semanage_bool_iterate_local(sh, &handler_bool_iterate_local,
                                           NULL) >= 0);
-    CU_ASSERT(counter_bool_iterate_local == 2);
+    CU_ASSERT(counter_bool_iterate_local == init_count + 2);
 
     //CU_ASSERT_SIGNAL(semanage_bool_iterate_local(sh, NULL, NULL), SIGSEGV);
 
@@ -917,13 +918,14 @@ void test_bool_iterate_local(void) {
 void test_bool_list_local(void) {
     semanage_bool_t **records;
     unsigned int count;
+    unsigned int init_count;
 
     // null
     CU_ASSERT_SIGNAL(semanage_bool_list_local(NULL, &records, &count), SIGSEGV);
 
     // handle
     setup_handle(SH_HANDLE);
-    
+
     CU_ASSERT(semanage_bool_list_local(sh, &records, &count) < 0);
 
     CU_ASSERT(semanage_bool_list_local(sh, NULL, &count) < 0);
@@ -934,8 +936,10 @@ void test_bool_list_local(void) {
     // connect
     setup_handle(SH_CONNECT);
     
+    CU_ASSERT(semanage_bool_count_local(sh, &init_count) >= 0);
+
     CU_ASSERT(semanage_bool_list_local(sh, &records, &count) >= 0);
-    CU_ASSERT(count == 0);
+    CU_ASSERT(count == init_count);
 
     CU_ASSERT_SIGNAL(semanage_bool_list_local(sh, NULL, &count), SIGSEGV);
     CU_ASSERT_SIGNAL(semanage_bool_list_local(sh, &records, NULL), SIGSEGV);
@@ -946,18 +950,18 @@ void test_bool_list_local(void) {
     setup_handle(SH_TRANS);
 
     CU_ASSERT(semanage_bool_list_local(sh, &records, &count) >= 0);
-    CU_ASSERT(count == 0);
+    CU_ASSERT(count == init_count);
 
     add_local_bool(I_FIRST);
     
     CU_ASSERT(semanage_bool_list_local(sh, &records, &count) >= 0);
-    CU_ASSERT(count == 1);
+    CU_ASSERT(count == init_count + 1);
     CU_ASSERT_PTR_NOT_NULL(records[0]);
 
     add_local_bool(I_SECOND);
     
     CU_ASSERT(semanage_bool_list_local(sh, &records, &count) >= 0);
-    CU_ASSERT(count == 2);
+    CU_ASSERT(count == init_count + 2);
     CU_ASSERT_PTR_NOT_NULL(records[0]);
     CU_ASSERT_PTR_NOT_NULL(records[1]);
 
