@@ -35,7 +35,7 @@ rlJournalStart
     rlPhaseStartSetup
         rlRun "rlImport --all" || rlDie
 
-        rlRun "rlCheckMakefileRequires"
+        rlRun "rlCheckMakefileRequires" || rlDie
 
         VERS=$(rpm -q $PACKAGE | cut -f 2 -d '-')
         VERS_MAJOR=$(echo $VERS | cut -f 1 -d '.')
