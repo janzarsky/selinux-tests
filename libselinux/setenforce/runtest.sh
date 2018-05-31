@@ -43,6 +43,9 @@ rlJournalStart
         rlRun "setenforce --help" 0,1
         OUTPUT_FILE=`mktemp`
         export LC_ALL=en_US.utf8
+        rlRun "TmpDir=\$(mktemp -d)" 0 "Creating tmp directory"
+        rlRun "auditctl -l > $TmpDir/auditctl" 0 "Backup current audit rules"
+        rlRun "auditctl -D" 0 "Delete all audit rules"
     rlPhaseEnd
 
     rlPhaseStartTest "basic use"
@@ -56,9 +59,7 @@ rlJournalStart
         sleep 5
         rlRun "ausearch --input-logs -m MAC_STATUS -i -ts ${START_DATE_TIME} | grep 'type=MAC_STATUS.*enforcing=1.*old_enforcing=0'"
         rlRun "ausearch --input-logs -m MAC_STATUS -i -ts ${START_DATE_TIME} | grep 'type=MAC_STATUS.*enforcing=0.*old_enforcing=1'"
-        if rlIsRHEL ; then
-            rlRun "ausearch --input-logs -m MAC_STATUS -i -ts ${START_DATE_TIME} | grep 'type=SYSCALL.*comm=setenforce'"
-        fi
+        rlRun "ausearch --input-logs -m MAC_STATUS -i -ts ${START_DATE_TIME} | grep 'type=SYSCALL.*comm=setenforce'"
     rlPhaseEnd
 
     rlPhaseStartTest "extreme cases"
@@ -81,6 +82,7 @@ rlJournalStart
     rlPhaseEnd
 
     rlPhaseStartCleanup
+        rlRun "auditctl -R $TmpDir/auditctl" 0 "Restore audit rules"
         rm -f ${OUTPUT_FILE}
     rlPhaseEnd
 rlJournalPrintText
