@@ -103,10 +103,6 @@ rlJournalStart
     rlPhaseStartTest "invalid path"
         rlRun "./test_restorecon EMPTY" 255 "Calling selinux_restorecon with empty path"
 
-        # should probably return both 139 (segfault) or 255, but it is not so important
-        rlRun "./test_restorecon NULL" 139,255 "Calling selinux_restorecon with null as path"
-        rlRun "./test_restorecon NULL REALPATH" 139,255 "Calling selinux_restorecon with null as path and REALPATH flag"
-        
         rlRun "./test_restorecon /nonexistent" 255 "Calling selinux_restorecon with nonexisting path"
     rlPhaseEnd
 
@@ -281,26 +277,6 @@ rlJournalStart
         rlRun "grep \"\\\"$TmpDir/a/bfile\\\"\"     strace_xattr.out"
         rlRun "grep \"\\\"$TmpDir/a/b/cfile\\\"\"   strace_xattr.out"
 
-        ### selinux_restorecon_set_exclude_list expects
-        ### "a pointer containing a NULL terminated list of one or more directories"
-        ### therefore this test doesn't make sense now
-        ### # null as list
-        ### if rlIsFedora ">=26"; then
-        ###     rlRun "strace -ostrace.out -s 64 ./test_exclude_list NULL $TmpDir" 139 "Calling selinux_restorecon_set_exclude_list with null as list"
-        ### else
-        ###     rlRun "strace -ostrace.out -s 64 ./test_exclude_list NULL $TmpDir" 0 "Calling selinux_restorecon_set_exclude_list with null as list"
-        ### 
-        ###     rlLogInfo "Checking lgetxattr calls"
-        ###     rlRun "grep lgetxattr strace.out | grep security.selinux > strace_xattr.out"
-        ### 
-        ###     rlRun "grep \"\\\"$TmpDir\\\"\"             strace_xattr.out"
-        ###     rlRun "grep \"\\\"$TmpDir/a\\\"\"           strace_xattr.out"
-        ###     rlRun "grep \"\\\"$TmpDir/afile\\\"\"       strace_xattr.out"
-        ###     rlRun "grep \"\\\"$TmpDir/a/b\\\"\"         strace_xattr.out"
-        ###     rlRun "grep \"\\\"$TmpDir/a/bfile\\\"\"     strace_xattr.out"
-        ###     rlRun "grep \"\\\"$TmpDir/a/b/cfile\\\"\"   strace_xattr.out"
-        ### fi
-
         # exclude $TmpDir/a
         rlRun "strace -ostrace.out -s 64 ./test_exclude_list $TmpDir/a $TmpDir" 0 "Calling selinux_restorecon_set_exclude_list"
 
@@ -322,12 +298,6 @@ rlJournalStart
 
     rlPhaseStartTest "selinux_restorecon_set_sehandle"
         createTestFiles
-
-        # null sehandle
-        rlRun "./test_sehandle NULL $TmpDir" 139,255 "Calling selinux_restorecon_set_sehandle with null handle"
-
-        # invalid sehandle
-        rlRun "./test_sehandle INVALID $TmpDir" 139,255 "Calling selinux_restorecon_set_sehandle with invalid handle"
 
         # default sehandle
         rlRun "strace -ostrace.out -s 64 ./test_sehandle DEFAULT $TmpDir" 0 "Calling selinux_restorecon_set_sehandle with default handle"
