@@ -1,6 +1,9 @@
-contact: Petr Lautrbach <plautrba@redhat.com>
-test: runtest.sh
+test: ./runtest.sh
 tags: [Tier2]
+duration: 5m
+
+#contact: Petr Lautrbach <plautrba@redhat.com>
+#requires: [policycoreutils, libselinux-utils]
 
 /checkpolicy:
     component: checkpolicy

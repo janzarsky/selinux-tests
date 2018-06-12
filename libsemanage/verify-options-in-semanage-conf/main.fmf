@@ -1,0 +1,12 @@
+path: /libsemanage/verify-options-in-semanage-conf
+summary: Are the verify options in semanage.conf honored?
+description: |
+    Are the verify options in semanage.conf honored?
+    Tested options: verify kernel, verify module, verify linked
+    Tested tools: semodule, semanage
+    Positive and negative cases are tested.
+    Original information found at http://selinuxproject.org/page/PolicyValidate
+relevancy:
+    - "distro = rhel-4, rhel-5: False"
+
+#requires+: [libsemanage]
