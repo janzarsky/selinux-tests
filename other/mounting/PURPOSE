@@ -1,0 +1,3 @@
+PURPOSE of /CoreOS/selinux-policy/Sanity/mounting
+Description: Mount various filesystems, test context options.
+Author: Jan Zarsky <jzarsky@redhat.com>
