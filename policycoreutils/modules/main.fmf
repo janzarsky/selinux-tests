@@ -1,0 +1,11 @@
+path: /policycoreutils/modules
+summary: test basic module functionality
+description: |
+    The test compiles a TE module, loads it via semodule, and checks
+    that the rules are enforced. The same is done with a CIL module.
+    Module overriding using priorities and module disabling is also
+    tested. This test requires policycoreutils and selinux-policy-devel
+    packages.
+relevancy:
+    - "distro = rhel-4, rhel-5, rhel-6: False"
+duration: 10m
