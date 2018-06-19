@@ -1,0 +1,7 @@
+path: /policycoreutils/booleans
+summary: Test basic operations with booleans
+description: |
+    The test defines its own booleans and tests setting it on and off
+    using setsebool and semanage boolean.
+relevancy:
+    - "distro = rhel-4, rhel-5, rhel-6: False"
