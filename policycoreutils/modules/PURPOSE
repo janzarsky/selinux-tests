@@ -1,0 +1,3 @@
+PURPOSE of /CoreOS/policycoreutils/Sanity/modules
+Description: Test module compiling and loading
+Author: Jan Zarsky <jzarsky@redhat.com>
