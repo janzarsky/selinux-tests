@@ -1,0 +1,3 @@
+PURPOSE of /CoreOS/policycoreutils/Sanity/selinux-info
+Description: Test sestatus, avcstat, getenforce and other information gathering tools
+Author: Jan Zarsky <jzarsky@redhat.com>
