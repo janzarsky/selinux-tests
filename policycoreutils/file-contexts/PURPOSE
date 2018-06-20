@@ -1,0 +1,3 @@
+PURPOSE of /CoreOS/policycoreutils/Sanity/file-contexts
+Description: Test semanage fcontext, restorecon, fixfiles, chcon
+Author: Jan Zarsky <jzarsky@redhat.com>
