@@ -1,0 +1,7 @@
+path: /policycoreutils/file-contexts
+summary: Test semanage fcontext, restorecon, fixfiles, chcon
+description: |
+    The test adds custom file contexts, runs restorecon and checks file
+    contexts. The chcon command is also tested.
+relevancy:
+    - "distro = rhel-4, rhel-5, rhel-6: False"
