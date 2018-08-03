@@ -38,8 +38,8 @@ rlJournalStart
     rlPhaseEnd
 
     rlPhaseStartTest "TE module using Makefile"
-        rlRun "mkdir test"
-        rlRun "pushd test"
+        rlRun "TmpDir=\$(mktemp -d)" 0 "Creating tmp directory"
+        rlRun "pushd $TmpDir"
 
         # create new type, allow reading, do not allow writing
         rlRun "cat << EOF >test_module.te
@@ -74,12 +74,12 @@ EOF"
         rlRun "semodule -r test_module"
 
         rlRun "popd"
-        rlRun "rm -rf test"
+        rlRun "rm -rf $TmpDir"
     rlPhaseEnd
 
     rlPhaseStartTest "CIL module"
-        rlRun "mkdir test"
-        rlRun "pushd test"
+        rlRun "TmpDir=\$(mktemp -d)" 0 "Creating tmp directory"
+        rlRun "pushd $TmpDir"
 
         # create new type, allow reading, do not allow writing
         rlRun "cat << EOF >test_module.cil
@@ -102,12 +102,12 @@ EOF"
         rlRun "semodule -r test_module"
 
         rlRun "popd"
-        rlRun "rm -rf test"
+        rlRun "rm -rf $TmpDir"
     rlPhaseEnd
 
     rlPhaseStartTest "Priorities"
-        rlRun "mkdir test"
-        rlRun "pushd test"
+        rlRun "TmpDir=\$(mktemp -d)" 0 "Creating tmp directory"
+        rlRun "pushd $TmpDir"
 
         # create new type, allow reading and writing
         rlRun "cat << EOF >test_module.cil
@@ -146,12 +146,12 @@ EOF"
         rlRun "semodule -r test_module -X 500"
 
         rlRun "popd"
-        rlRun "rm -rf test"
+        rlRun "rm -rf $TmpDir"
     rlPhaseEnd
 
     rlPhaseStartTest "Disabling modules"
-        rlRun "mkdir test"
-        rlRun "pushd test"
+        rlRun "TmpDir=\$(mktemp -d)" 0 "Creating tmp directory"
+        rlRun "pushd $TmpDir"
 
         # create new type, allow reading
         rlRun "cat << EOF >test_module.cil
@@ -192,7 +192,7 @@ EOF"
         rlRun "semodule -r test_module test_module_writing"
 
         rlRun "popd"
-        rlRun "rm -rf test"
+        rlRun "rm -rf $TmpDir"
     rlPhaseEnd
 
     rlPhaseStartCleanup
