@@ -5,3 +5,4 @@ description: |
     using setsebool and semanage boolean.
 relevancy:
     - "distro = rhel-4, rhel-5, rhel-6: False"
+tier: 1
