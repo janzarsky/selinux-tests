@@ -1,4 +1,4 @@
-path: /libsemanage/verify-options-in-semanage-conf
+path: libsemanage/verify-options-in-semanage-conf
 summary: Are the verify options in semanage.conf honored?
 description: |
     Are the verify options in semanage.conf honored?
