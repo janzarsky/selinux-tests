@@ -44,7 +44,7 @@ rlJournalStart
         OUTPUT_FILE=`mktemp`
         export LC_ALL=en_US.utf8
         rlRun "TmpDir=\$(mktemp -d)" 0 "Creating tmp directory"
-        rlRun "auditctl -l > $TmpDir/auditctl" 0 "Backup current audit rules"
+        rlRun "auditctl -l | sed 's/^No rules$/# No rules/' > $TmpDir/auditctl" 0 "Backup current audit rules"
         rlRun "auditctl -D" 0 "Delete all audit rules"
     rlPhaseEnd
 
