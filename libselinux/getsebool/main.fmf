@@ -1,2 +1,2 @@
-path: libselinux/getsebool
+path: /libselinux/getsebool
 tier: 1

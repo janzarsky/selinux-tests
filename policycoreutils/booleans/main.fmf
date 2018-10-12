@@ -1,4 +1,4 @@
-path: policycoreutils/booleans
+path: /olicycoreutils/booleans
 summary: Test basic operations with booleans
 description: |
     The test defines its own booleans and tests setting it on and off

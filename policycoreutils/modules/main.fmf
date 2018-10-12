@@ -1,4 +1,4 @@
-path: policycoreutils/modules
+path: /olicycoreutils/modules
 summary: test basic module functionality
 description: |
     The test compiles a TE module, loads it via semodule, and checks

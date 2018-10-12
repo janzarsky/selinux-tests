@@ -1,4 +1,4 @@
-path: policycoreutils/file-contexts
+path: /olicycoreutils/file-contexts
 summary: Test semanage fcontext, restorecon, fixfiles, chcon
 description: |
     The test adds custom file contexts, runs restorecon and checks file
