@@ -1,4 +1,4 @@
-path: /ther/mounting
+path: other/mounting
 summary: Mount various filesystems, test context options
 description: |
     Test the context and defcontext options of the mount command. Test

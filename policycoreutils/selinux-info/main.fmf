@@ -1,4 +1,4 @@
-path: /olicycoreutils/selinux-info
+path: policycoreutils/selinux-info
 summary: test sestatus, avcstat, getenforce
 description: |
     Test that output of sestatus matches information in /sys/fs/selinux.
