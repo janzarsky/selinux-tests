@@ -111,10 +111,13 @@ rlJournalStart
 
         # Check that files matching with $2 in dir $1 have context $3
         function check_contexts {
-            COMMAND="find $1 -name '$2'"
-            for ITEM in `eval $COMMAND`; do
-                rlRun "ls -ladZ $ITEM | grep :$3";
+            rlRun "find $1 -name '$2' >files"
+            rlRun "[ $(cat files | wc -l) -gt 0 ]"
+
+            for f in $files; do
+                rlRun "ls -ladZ $f | grep :$3"
             done
+            rlRun "rm files"
         }
 
         # Create the testing dirs and files
@@ -184,7 +187,7 @@ EOF"
         check_initial_contexts 'incorrect1.dir'
         check_initial_contexts 'correct.dir'
         check_initial_contexts 'customizable.dir'
-        check_contexts 'incorrect2' '*' 'correct_t'
+        check_contexts 'incorrect2.dir' '*' 'correct_t'
         rlRun "ls -ladZ customizable.file | grep customizable_t"
         rlRun "ls -ladZ incorrect.file | grep :correct_t"
 
