@@ -35,7 +35,11 @@ PACKAGE="policycoreutils"
 rlJournalStart
     rlPhaseStartSetup
         rlAssertRpm ${PACKAGE}
-        rlServiceStop mcstrans mcstransd
+        if which mcstrans; then
+            rlServiceStop mcstrans
+        elif which mcstransd; then
+            rlServiceStop mcstransd
+        fi
         rlRun "rpm -qf `which restorecon` | grep ${PACKAGE}"
         rlRun "setenforce 1"
         rlRun "sestatus"
@@ -363,7 +367,11 @@ EOF"
     fi
 
     rlPhaseStartCleanup
-        rlServiceRestore mcstrans mcstransd
+        if which mcstrans; then
+            rlServiceRestore mcstrans
+        elif which mcstransd; then
+            rlServiceRestore mcstransd
+        fi
     rlPhaseEnd
     rlJournalPrintText
 rlJournalEnd
